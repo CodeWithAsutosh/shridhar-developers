@@ -1,0 +1,204 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  /* Color palette using the gold theme */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 43 74% 59%; /* Gold color #d1a954 */
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 45 100% 70%; /* Lighter gold for accents */
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 43 74% 59%; /* Gold ring */
+  --radius: 0.75rem;
+  --chart-1: 43 74% 59%;
+  --chart-2: 45 100% 70%;
+  --chart-3: 240 10% 3.9%;
+  --chart-4: 240 4.8% 95.9%;
+  --chart-5: 0 84.2% 60.2%;
+
+  /* Beautiful gradients using gold */
+  --gradient-primary: linear-gradient(135deg, hsl(43 74% 59%), hsl(45 100% 70%));
+  --gradient-hero: linear-gradient(135deg, hsl(220 25% 25%) 0%, hsl(220 30% 15%) 50%, hsl(220 25% 10%) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(240 4.8% 97%) 100%);
+  --gradient-overlay: linear-gradient(135deg, hsla(43 74% 59% / 0.9), hsla(45 100% 70% / 0.7));
+
+  /* Elegant shadows with gold glow */
+  --shadow-elegant: 0 10px 30px -10px hsl(43 74% 59% / 0.3);
+  --shadow-glow: 0 0 40px hsl(45 100% 70% / 0.4);
+  --shadow-card: 0 20px 40px -10px hsl(43 74% 59% / 0.15);
+
+  /* Smooth transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 43 74% 59%; /* Keep gold in dark mode */
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 45 100% 70%; /* Lighter gold for dark mode accents */
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 43 74% 59%;
+
+  /* Dark mode gradients */
+  --gradient-card: linear-gradient(145deg, hsl(240 10% 3.9%) 0%, hsl(240 3.7% 15.9%) 100%);
+  --gradient-hero: linear-gradient(135deg, hsl(220 25% 10%) 0%, hsl(220 30% 5%) 50%, hsl(220 25% 2%) 100%);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.8);
+}
+
+/* Cool animation utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+  50% { transform: scale(1.05) rotate(2deg); }
+  70% { transform: scale(0.9) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes slide-up-fade {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes logo-entrance {
+  0% { 
+    transform: scale(0.8) rotate(-10deg); 
+    opacity: 0;
+    filter: blur(2px);
+  }
+  50% { 
+    transform: scale(1.1) rotate(5deg); 
+    filter: blur(1px);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg); 
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: rotate 3s linear infinite;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.6s ease-out;
+}
+
+.animate-logo-entrance {
+  animation: logo-entrance 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Hover animations */
+.hover-lift {
+  transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-elegant);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+  transition: var(--transition-smooth);
+}
+
+.hover-scale {
+  transition: var(--transition-smooth);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
