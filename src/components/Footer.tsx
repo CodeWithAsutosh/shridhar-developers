@@ -39,28 +39,32 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-2 mb-6">
               <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">SD</span>
+                <img
+                  src="/lovable-uploads/73f1ec84-4880-4bfa-8685-079a5bdbbc49.png"
+                  alt="Shridhar Developers Logo"
+                  className="w-12 h-12 object-contain"
+                />
               </div>
               <span className="text-xl font-bold">Shridhar Developers</span>
             </div>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Creating homes that embody peace, safety, and pride. With 25+ years of excellence, 
+              Creating homes that embody peace, safety, and pride. With 25+ years of excellence,
               we build more than structures - we build communities.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <Mail size={16} className="text-primary" />
-                <span className="text-sm">info@shridhardevelopers.com</span>
+                <a href="mailto:srepl2011@gmail.com" className="text-sm">srepl2011@gmail.com</a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={16} className="text-primary" />
-                <span className="text-sm">+91 98765 43210</span>
+                <a href="tel:+917858080838" className="text-sm">+91 7858080838</a>
               </div>
               <div className="flex items-center gap-3">
-                <MapPin size={16} className="text-primary" />
-                <span className="text-sm">123 Business District, City</span>
+                <MapPin size={32} className="text-primary" />
+                <span className="text-sm">Sarat Kanya Heights, Navin Mitra Lane, Burdwan Compound, Lalpur, Ranchi, Jharkhand 834001, IN</span>
               </div>
             </div>
           </div>
@@ -71,8 +75,8 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
                     {link.name}
@@ -88,8 +92,8 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.projects.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
                     {link.name}
@@ -105,8 +109,8 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors duration-300 text-sm"
                   >
                     {link.name}
@@ -125,9 +129,9 @@ const Footer = () => {
               Subscribe to our newsletter for the latest updates on new projects and developments.
             </p>
             <div className="flex gap-4 max-w-md mx-auto">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
+              <input
+                type="email"
+                placeholder="Enter your email"
                 className="flex-1 px-4 py-3 rounded-lg bg-background border border-border/30 text-foreground focus:border-primary focus:outline-none transition-colors duration-300"
               />
               <button className="px-6 py-3 bg-gradient-primary rounded-lg text-primary-foreground font-medium hover:shadow-glow transition-all duration-300">

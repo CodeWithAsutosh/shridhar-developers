@@ -39,6 +39,31 @@ export default function ContactForm() {
     setIsSubmitting(true);
     
     try {
+      // 1. Submit to Web3Forms for email delivery
+      const web3formsResponse = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          name: `${values.firstName} ${values.lastName}`,
+          email: values.email,
+          phone: values.phone || "Not provided",
+          subject: values.subject,
+          message: values.message,
+          from_name: "Shridhar Developers Contact Form",
+        }),
+      });
+
+      const web3formsData = await web3formsResponse.json();
+      
+      if (!web3formsResponse.ok) {
+        throw new Error(web3formsData.message || "Failed to send email via Web3Forms");
+      }
+
+      // 2. Submit to Supabase as backup and record
       const { error } = await supabase
         .from('contact_messages')
         .insert([
@@ -53,7 +78,8 @@ export default function ContactForm() {
         ]);
 
       if (error) {
-        throw error;
+        console.error("Supabase insert error (email was still sent):", error);
+        // We do not throw error here since the email was sent successfully.
       }
 
       toast.success("Message sent successfully! We'll get back to you soon.");
@@ -70,19 +96,19 @@ export default function ContactForm() {
     {
       icon: Mail,
       title: "Email Us",
-      details: "info@shridhardevelopers.com",
+      details: "srepl2011@gmail.com",
       subtitle: "Get in touch via email"
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: "+91 98765 43210",
+      details: "+91 7858080838",
       subtitle: "Mon-Sat 9AM-6PM"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: "123 Business District, City",
+      details: "Sarat Kanya Heights, Navin Mitra Lane, Burdwan Compound, Lalpur, Ranchi, Jharkhand 834001, IN",
       subtitle: "Our main office"
     },
     {

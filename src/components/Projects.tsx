@@ -10,6 +10,39 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: "Siddhartha Maison",
+      type: "residential",
+      status: "ongoing",
+      location: "Ranchi, Jharkhand",
+      year: "2024",
+      image: "/lovable-uploads/_MG_6676.webp",
+      description: "Luxury residential towers with panoramic city views",
+      features: ["50 Floors", "2-4 BHK", "Sky Garden", "Premium Amenities"]
+    },
+    {
+      id: 2,
+      title: "Sagun Ishan Estate",
+      type: "residential",
+      status: "ongoing",
+      location: "Ranchi, Jharkhand",
+      year: "2024",
+      image: "/lovable-uploads/_MG_6820.webp",
+      description: "Luxury residential towers with panoramic city views",
+      features: ["50 Floors", "2-4 BHK", "Sky Garden", "Premium Amenities"]
+    },
+    {
+      id: 3,
+      title: "LA DOLCE VITA Commercial",
+      type: "commercial",
+      status: "completed",
+      location: "Ranchi, Jharkhand",
+      year: "2022",
+      image: "/lovable-uploads/_MG_6649.webp",
+      description: "Upscale commercial complex with retail and dining",
+      features: ["Retail Spaces", "Restaurants", "Entertainment", "Valet Parking"]
+    },
+    {
+      id: 4,
       title: "Skyline Heights",
       type: "residential",
       status: "ongoing",
@@ -20,7 +53,7 @@ const Projects = () => {
       features: ["50 Floors", "2-4 BHK", "Sky Garden", "Premium Amenities"]
     },
     {
-      id: 2,
+      id: 5,
       title: "Green Valley Villas",
       type: "residential",
       status: "ongoing",
@@ -31,7 +64,7 @@ const Projects = () => {
       features: ["3-5 BHK", "Private Gardens", "Solar Power", "Rain Harvesting"]
     },
     {
-      id: 3,
+      id: 6,
       title: "Urban Nest",
       type: "residential",
       status: "ongoing",
@@ -42,7 +75,7 @@ const Projects = () => {
       features: ["1-3 BHK", "Co-working Space", "Gym", "Rooftop Lounge"]
     },
     {
-      id: 4,
+      id: 7,
       title: "Janki Shridhar Tower",
       type: "commercial",
       status: "completed",
@@ -53,18 +86,7 @@ const Projects = () => {
       features: ["40 Floors", "Office Spaces", "Food Court", "Parking"]
     },
     {
-      id: 5,
-      title: "LA DOLCE VITA Commercial",
-      type: "commercial",
-      status: "completed",
-      location: "Shopping District",
-      year: "2022",
-      image: "/lovable-uploads/2362680.jpg",
-      description: "Upscale commercial complex with retail and dining",
-      features: ["Retail Spaces", "Restaurants", "Entertainment", "Valet Parking"]
-    },
-    {
-      id: 6,
+      id: 8,
       title: "Lemon Tree Premier",
       type: "hospitality",
       status: "upcoming",
@@ -218,14 +240,14 @@ const Projects = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12 animate-slide-up-fade">
+        {/* <div className="text-center mt-12 animate-slide-up-fade">
           <Button
             size="lg"
             className="bg-gradient-primary hover:shadow-glow hover-scale transition-all duration-500"
           >
             View All Projects
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
