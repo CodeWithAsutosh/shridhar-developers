@@ -2,15 +2,24 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Hero = () => {
   const years = useCountUp({ end: 25, duration: 2500 });
   const projects = useCountUp({ end: 30, duration: 2500 });
   const delivered = useCountUp({ end: 180, duration: 2500 });
   const underway = useCountUp({ end: 170, duration: 2500 });
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* YouTube Background Video */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <iframe
@@ -49,15 +58,19 @@ const Hero = () => {
               size="lg" 
               className="group hover:scale-105 transition-all duration-500 text-lg px-8 py-4 animate-bounce-in"
               style={{ animationDelay: '0.6s' }}
+              asChild
             >
-              Explore Projects
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+              <a href="#projects">
+                Explore Projects
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-2 transition-transform duration-300" />
+              </a>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               className="group border-2 border-primary/40 text-primary hover:bg-primary/10 hover:border-primary/50 hover:scale-105 transition-all duration-500 text-lg px-8 py-4 animate-bounce-in"
               style={{ animationDelay: '0.8s' }}
+              onClick={() => setIsVideoOpen(true)}
             >
               <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
               Watch Our Story
@@ -101,6 +114,23 @@ const Hero = () => {
         </div>
       </div>
     </section>
+    
+    <Dialog open={isVideoOpen} onOpenChange={setIsVideoOpen}>
+      <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black/95 border-primary/20 shadow-2xl">
+        <DialogHeader className="p-4 bg-gradient-to-r from-primary to-accent">
+          <DialogTitle className="text-white font-bold text-xl">Our Story - Shridhar Developers</DialogTitle>
+        </DialogHeader>
+        <div className="aspect-video w-full">
+          <iframe
+            src="https://www.youtube.com/embed/l6EzZafb1Pk?autoplay=1&rel=0"
+            className="w-full h-full"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
 
