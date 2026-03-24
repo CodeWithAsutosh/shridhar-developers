@@ -17,7 +17,7 @@ const Header = () => {
   const navItems = [
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
-    { name: "Careers", href: "/Career" },
+    { name: "Careers", href: "/career" },
     { name: "Contact Us", href: "#contact" },
   ];
 
@@ -108,15 +108,27 @@ const Header = () => {
 
           <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item, index) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="relative text-muted-foreground hover:text-primary transition-all duration-300 font-medium group animate-slide-up-fade"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              item.href.startsWith("#") ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="relative text-muted-foreground hover:text-primary transition-all duration-300 font-medium group animate-slide-up-fade"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="relative text-muted-foreground hover:text-primary transition-all duration-300 font-medium group animate-slide-up-fade"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {item.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              )
             ))}
 
             {/* Important Highlights Popup (Desktop) */}
@@ -201,15 +213,27 @@ const Header = () => {
           <div className="lg:hidden py-4 animate-slide-up-fade backdrop-blur-lg bg-background/95 rounded-lg mt-2 border border-border/20">
             <div className="flex flex-col space-y-4">
               {navItems.map((item, index) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium py-2 px-4 rounded-lg hover:bg-muted/50 animate-slide-up-fade"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
+                item.href.startsWith("#") ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium py-2 px-4 rounded-lg hover:bg-muted/50 animate-slide-up-fade"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 font-medium py-2 px-4 rounded-lg hover:bg-muted/50 animate-slide-up-fade"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
 
               {/* Mobile Important Highlights Popup */}
