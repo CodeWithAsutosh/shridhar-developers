@@ -1,18 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Briefcase, Users, HeartHandshake, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: (i = 1) => ({
+  visible: (i: number = 1) => ({
     opacity: 1,
     y: 0,
     transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
   }),
 };
 
-const staggerParent = {
+const staggerParent: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -151,11 +151,11 @@ const CareerPage = () => {
                 {job.location} • {job.type}
               </p>
               <p className="mb-6 text-gray-700">{job.description}</p>
-              <Button
+              <Button asChild
                 size="lg"
                 className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white rounded-full hover:scale-105 transition-transform duration-300"
               >
-                Apply Now
+                <a href="mailto:srepl2011@gmail.com">Apply Now</a>
               </Button>
             </motion.div>
           ))}

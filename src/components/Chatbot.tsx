@@ -35,6 +35,32 @@ const Chatbot = () => {
     }
   }, [messages]);
 
+  const checkLocalRules = (input: string): string | null => {
+    const lowerInput = input.toLowerCase();
+
+    if (/\b(contact|phone|email|address|location|call|reach|office)\b/.test(lowerInput)) {
+      return "You can reach us at +91 7858080838 or email us at srepl2011@gmail.com. Our main office is at Sarat Kanya Heights, Navin Mitra Lane, Burdwan Compound, Lalpur, Ranchi, Jharkhand 834001, IN. We are open Monday - Saturday, 9:00 AM - 6:00 PM.";
+    }
+
+    if (/\b(founder|ceo|owner|started|who is)\b/.test(lowerInput)) {
+      return "Shridhar Developers was founded by Mr. Upendra Singh (Chikku Singh) in 2008. With his vision and dedication, we have completed 24+ projects over the span of 25+ years.";
+    }
+
+    if (/\b(project|projects|apartment|flat|buy|villa|commercial|property|properties)\b/.test(lowerInput)) {
+      return "We offer Residential, Commercial, and Hospitality properties. Some of our key projects include Skyline Heights, Green Valley Villas, Janki Shridhar Tower, and Lemon Tree Premier. Please visit our 'Projects' section on the website for more details!";
+    }
+
+    if (/\b(career|job|jobs|hiring|vacancy|work)\b/.test(lowerInput)) {
+      return "We are always looking for talented individuals! Currently we have openings for Senior Architect (Ahmedabad), Site Engineer (Surat), and Sales Executive (Vadodara). You can send your resume to srepl2011@gmail.com.";
+    }
+
+    if (/\b(about|history|experience|how old|company)\b/.test(lowerInput)) {
+      return "For over 25 years, Shridhar Developers has been creating homes that embody peace, safety, and pride. We have delivered over 180+ Million Sq. Ft. of property with a 98% success rate.";
+    }
+
+    return null;
+  };
+
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
@@ -50,25 +76,58 @@ const Chatbot = () => {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('ai-chat', {
-        body: { message: inputValue }
-      });
+      const currentInput = inputValue; // Capture current input
+      const localResponse = checkLocalRules(currentInput);
 
-      if (error) throw error;
+      if (localResponse) {
+        // Simulate a tiny delay for local responses so it feels natural
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          content: localResponse,
+          role: 'assistant',
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, assistantMessage]);
+      } else {
+        // Fallback to LLM
+        const { data, error } = await supabase.functions.invoke('ai-chat', {
+          body: { message: currentInput }
+        });
 
-      const assistantMessage: Message = {
+        if (error) throw error;
+
+        let responseText = data.response;
+        
+        // If LLM response is empty or indicates it doesn't know, use the final fallback
+        if (!responseText || responseText.includes("I'm sorry") || responseText.includes("I don't know")) {
+             responseText = "I'm sorry, I couldn't understand that. For more specific queries, please contact us directly at +91 7858080838 or email srepl2011@gmail.com.";
+        }
+
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          content: responseText,
+          role: 'assistant',
+          timestamp: new Date(),
+        };
+
+        setMessages(prev => [...prev, assistantMessage]);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      // Fallback response instead of error toast
+      const fallbackMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: data.response,
+        content: "I'm sorry, I seem to be having trouble connecting. For immediate assistance, please contact us directly at +91 7858080838 or email srepl2011@gmail.com.",
         role: 'assistant',
         timestamp: new Date(),
       };
-
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
-      console.error('Error sending message:', error);
+      setMessages(prev => [...prev, fallbackMessage]);
+      
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "Connection Error",
+        description: "Switched to fallback offline responses.",
         variant: "destructive",
       });
     } finally {
